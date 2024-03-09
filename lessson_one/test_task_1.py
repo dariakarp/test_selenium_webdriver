@@ -8,7 +8,7 @@ from selenium.webdriver.common.keys import Keys
 
 @pytest.fixture
 def driver(request):
-    wd = webdriver.Chrome()
+    wd = webdriver.Firefox()
     request.addfinalizer(wd.quit)
     return wd
 
@@ -17,3 +17,4 @@ def test_open_page(driver):
     driver.find_element("name", "q").send_keys("Hello, world!")
     time.sleep(3)
     driver.find_element("name", "btnK").click()
+    time.sleep(5)

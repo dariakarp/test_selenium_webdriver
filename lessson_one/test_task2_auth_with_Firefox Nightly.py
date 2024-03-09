@@ -1,14 +1,20 @@
+#открытие приложения через браузер Firefox Nightly
+
 import time
 
 import pytest
 from selenium import webdriver
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.firefox.options import Options
+
+firefox_options = Options()
+firefox_options = webdriver.FirefoxOptions()
+firefox_options.binary_location = "C:\\Program Files\\Firefox Nightly\\firefox.exe"
+
 
 @pytest.fixture
 def driver(request):
-    wd = webdriver.Chrome()
+    wd = webdriver.Firefox(firefox_options)
     request.addfinalizer(wd.quit)
     return wd
 
