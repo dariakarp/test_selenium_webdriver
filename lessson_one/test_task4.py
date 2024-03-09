@@ -17,7 +17,7 @@ def test_open_page(driver):
     for i in range(len(products)):
         products = driver.find_elements("xpath", "//div[@class='image-wrapper']") #находит все карточки товаров
         product = products[i]#берет i-тый элемент
-        sticker = product.find_elements("xpath", "//*[contains(@class, 'sticker')]")
+        sticker = product.find_elements("xpath", ".//*[contains(@class, 'sticker')]")
         assert (len(sticker)) == 1
 
 
