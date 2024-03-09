@@ -20,19 +20,16 @@ def test_open_page(driver):
     elements = driver.find_elements("xpath", "//span[@class='fa-stack fa-lg icon-wrapper']")#находит все внешние элементы меню на странице
 
     for i in range(len(elements)):
-        try:
-            elements = driver.find_elements("xpath", "//span[@class='fa-stack fa-lg icon-wrapper']")
-            element = elements[i].click()
-            title = driver.find_element("xpath","//h1")
-            time.sleep(1)
+        elements = driver.find_elements("xpath", "//span[@class='fa-stack fa-lg icon-wrapper']")
+        element = elements[i].click()
+        title = driver.find_element("xpath","//h1")
 
-        except NoSuchElementException:
-            pass
+
+        menu_items = driver.find_elements("xpath", "//ul[@class = 'docs']//span[@class = 'name']")
+        for j in range(len(menu_items)):
             menu_items = driver.find_elements("xpath", "//ul[@class = 'docs']//span[@class = 'name']")
-            for j in range(len(menu_items)):
-                menu_items = driver.find_elements("xpath", "//ul[@class = 'docs']//span[@class = 'name']")
-                menu_item = menu_items[j].click()
-                title = driver.find_element("xpath", "//h1")
-                time.sleep(1)
+            menu_item = menu_items[j].click()
+            title = driver.find_element("xpath", "//h1")
+            
 
 
