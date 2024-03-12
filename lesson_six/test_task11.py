@@ -10,7 +10,7 @@ def driver(request):
     request.addfinalizer(wd.quit)
     return wd
 
-def test_registr_new_user(driver):
+def test_registr_new_user(driver): #регистрация пользователя
     driver.get("http://localhost/litecart/")
     link_create_account = driver.find_element("xpath", "//form[@name = 'login_form']//a")
     link_create_account.click()
@@ -19,5 +19,28 @@ def test_registr_new_user(driver):
     driver.find_element("name", "address1").send_keys("Спортивная, 18")
     driver.find_element("name", "postcode").send_keys("98989")
     driver.find_element("name", "city").send_keys("Лучший")
-    driver.find_element("id", "select2-country_code-ja-container").click()
-    time.sleep(2)
+    driver.find_element("xpath", "//span[@class = 'select2-selection select2-selection--single']").click()
+    driver.find_element("xpath", "//span[@class= 'select2-search select2-search--dropdown']/input[@type = 'search']").send_keys("united states")
+    driver.find_element("xpath", "//ul[@class = 'select2-results__options']/li").click()
+    driver.find_element("name", "email").send_keys("tulip@maill.ru")
+    driver.find_element("name", "phone").send_keys("+7989987989")
+    driver.find_element("name", "password").send_keys("тюльпанна")
+    driver.find_element("name", "confirmed_password").send_keys("тюльпанна")
+    driver.find_element("name", "create_account").click()
+    driver.find_element("xpath", "//ul[@class = 'list-vertical'] // li[4]").click()
+
+
+def test_auth_user(driver): #авторизация пользователя
+    driver.get("http://localhost/litecart/")
+    driver.find_element("name", "email").send_keys("tulip@maill.ru")
+    driver.find_element("name", "password").send_keys("тюльпанна")
+    driver.find_element("name", "login").click()
+    time.sleep(5)
+
+def test_logout_user(driver): #выход из аккаунта пользователя
+    driver.get("http://localhost/litecart/")
+    driver.find_element("name", "email").send_keys("tulip@maill.ru")
+    driver.find_element("name", "password").send_keys("тюльпанна")
+    driver.find_element("name", "login").click()
+    driver.find_element("xpath", "//ul[@class = 'list-vertical'] // li[4]").click()
+
