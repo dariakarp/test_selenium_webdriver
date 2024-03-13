@@ -52,9 +52,9 @@ def test_zones_countries(driver):
             country.click()
             list_countries = [] #пустой список, чтобы складывать туда значения стран
 
-            country_in_countries = driver.find_elements("xpath", "//table[@id = 'table-zones']//td[3]/input[@type!='text']")
-            for j in range(len(country_in_countries)):
-                country_name = country_in_countries[j].get_attribute("value")
+            country_in_countries = driver.find_elements("xpath", "//table[@id = 'table-zones']//td[3]")
+            for j in range(len(country_in_countries[:-1])): #прохожусь по списку всех локаторов, которые относятся к названию стран, кроме последнего поля ввода
+                country_name = country_in_countries[j].get_attribute("textContent")
                 list_countries.append(country_name)
 
             sorted_country_in_countries = sorted(list_countries)
