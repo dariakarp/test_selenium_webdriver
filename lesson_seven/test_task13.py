@@ -40,12 +40,15 @@ def test_work_in_basket(driver):
         wait.until(EC.text_to_be_present_in_element(("xpath", "//div[@id = 'cart']//span[@class = 'quantity']"), count_wait))
         driver.back()
     driver.find_element("xpath", "//div[@id ='cart']/a[3]").click() #клик на "Checkout" на корзину
-    products = driver.find_elements("xpath", "//form[@name = 'cart_form']/div//a")#нахожу все товары в таблице
 
-    for j in range(len(products)):
-        driver.find_element("xpath", "//button[@name =  'remove_cart_item' ]").click() #удаляю товар
-        table = driver.find_element("xpath", "//div[@id = 'box-checkout-summary']") #локатор таблицы
-        wait.until(EC.staleness_of(table)) #жду пока талица обновится
+    buttons_delete = driver.find_elements("xpath", "//form[@name='cart_form']//button[@name = 'remove_cart_item']")  # нахожу кнопки Удалить
+    for j in range(len(buttons_delete)):
+        table = driver.find_element("xpath", "//div[@id = 'box-checkout-summary']")  # нахожу таблицу по локатору
+        buttons_delete = driver.find_elements("xpath", "//form[@name='cart_form']//button[@name = 'remove_cart_item']")
+        button = buttons_delete[j] #кликаю на кнопку delete
+        button.click()
+        wait.until(EC.staleness_of(table))  # жду пока талица обновится
+
 
 
 
