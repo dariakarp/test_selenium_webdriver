@@ -4,6 +4,7 @@ import pytest
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.color import Color
 
 @pytest.fixture
 def driver(request):
@@ -45,22 +46,23 @@ def test_price(driver): #проверка, что у первого товара
     regular_price = driver.find_element("xpath","//div[@id = 'box-campaigns']//s[@class='regular-price']").value_of_css_property("color") #Получаю цвет значения цены в формате RGBA
     text_decoration = driver.find_element("xpath", "//div[@id = 'box-campaigns']//s[@class='regular-price']").value_of_css_property("text-decoration")#Получаю значение line-through solid rgb(119, 119, 119), которое соответствует перечеркнутому значению
 
-    a = list(regular_price) #значения rgba превращаю в кортеж
-    r = a[5]+a[6]+a[7]
-    g = a[10]+a[11]+a[12]
-    b = a[15] + a[16] + a[17]
+    # a = list(regular_price) #значения rgba превращаю в кортеж
+    # r = a[5]+a[6]+a[7]
+    # g = a[10]+a[11]+a[12]
+    # b = a[15] + a[16] + a[17]
 
-    assert r == g == b # серый цвет это когда rgb совпадают
-
+    # assert r == g == b # серый цвет это когда rgb совпадают
+    assert Color.from_string('rgb(0, 0, 0)')
 def test_color_in_Campaigns(driver): #проверка, что цена жирная и красная на странице в блоке Campaigns
     driver.get("http://localhost/litecart/en/")
     campaign_price = driver.find_element("xpath", "//div[@id = 'box-campaigns']//strong[@class='campaign-price']").value_of_css_property('color')
     campaign_price_font_weight = driver.find_element("xpath", "//div[@id = 'box-campaigns']//strong[@class='campaign-price']").value_of_css_property('font-weight')
 
-    a = list(campaign_price)
-    g = int(a[10])
-    b = int(a[13])
-    assert g == b == 0 # красный цвет, если g и b равны 0
+    # a = list(campaign_price)
+    # g = int(a[10])
+    # b = int(a[13])
+    assert Color.from_string('rgb(204, 0, 0)')
+    #assert g == b == 0 # красный цвет, если g и b равны 0
     assert int(campaign_price_font_weight) > 699 #жирными считаются значения больше или равны 700
 
 
@@ -69,11 +71,12 @@ def test_color_in_Campaigns(driver): #проверка, что цена жирн
     driver.find_element("xpath", "//div[@id = 'box-campaigns']//div[@class = 'name']").click()
     campaign_price = driver.find_element("xpath","//div[@id= 'box-product']//strong[@class = 'campaign-price']").value_of_css_property('color')
     campaign_price_font_weight = driver.find_element("xpath","//div[@id= 'box-product']//strong[@class = 'campaign-price']").value_of_css_property('font-weight')
-
-    a = list(campaign_price)
-    g = int(a[10])
-    b = int(a[13])
-    assert g == b == 0  # красный цвет, если g и b равны 0
+    assert Color.from_string('rgb(204, 0, 0)')
+    # # print(campaign_price)
+    # # a = list(campaign_price)
+    # # g = int(a[10])
+    # # b = int(a[13])
+    # # assert g == b == 0  # красный цвет, если g и b равны 0
     assert int(campaign_price_font_weight) > 699  # жирными считаются значения больше или равны 700
 
 
