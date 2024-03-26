@@ -44,9 +44,8 @@ def test_work_in_basket(driver):
     buttons_delete = driver.find_elements("xpath", "//form[@name='cart_form']//button[@name = 'remove_cart_item']")  # нахожу кнопки Удалить
     for j in range(len(buttons_delete)):
         table = driver.find_element("xpath", "//div[@id = 'box-checkout-summary']")  # нахожу таблицу по локатору
-        buttons_delete = driver.find_elements("xpath", "//form[@name='cart_form']//button[@name = 'remove_cart_item']")
-        button = buttons_delete[j] #кликаю на кнопку delete
-        button.click()
+        button = driver.find_element("xpath", "//form[@name='cart_form']//button[@name = 'remove_cart_item']")
+        button.click() #кликаю на кнопку delete
         wait.until(EC.staleness_of(table))  # жду пока талица обновится
 
 
