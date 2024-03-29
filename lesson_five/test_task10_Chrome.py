@@ -71,7 +71,7 @@ def test_campaign_price_more_than_regular_price(driver): #проверка, чт
     size_campaign_price = campaign_price.replace("px", "")
     size_regular_price = regular_price.replace("px", "")
 
-    assert int(size_campaign_price) > int(size_regular_price)
+    assert float(size_campaign_price) > float(size_regular_price)
 
 def test_campaign_price_more_than_regular_price_in_product(driver): #проверка, что в карточке акционная цена больше, чем обычная
     driver.get("http://localhost/litecart/en/")
@@ -82,6 +82,6 @@ def test_campaign_price_more_than_regular_price_in_product(driver): #прове�
     size_campaign_price = campaign_price.replace("px", "")
     size_regular_price = regular_price.replace("px", "")
 
-    assert int(size_campaign_price) > int(size_regular_price)
+    assert float(size_campaign_price) > float(size_regular_price)
 
 
