@@ -1,14 +1,11 @@
-import time
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import NoSuchElementException
 
 import pytest
-import os
+
 from selenium import webdriver
-from faker import Faker
-fake = Faker()
 
 
 @pytest.fixture
